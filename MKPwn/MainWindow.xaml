@@ -1,0 +1,38 @@
+﻿<Window x:Class="MKPwn.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MKPwn" Height="462" Width="556" Closing="Window_Closing" ResizeMode="CanMinimize" KeyDown="MainWindow_KeyDown" Icon="/MKPwn;component/Icon.ico">
+    <Grid Width="533" Height="412">
+        <GroupBox Header="Build" Height="315" HorizontalAlignment="Left" Margin="12,92,0,0" VerticalAlignment="Top" Width="510" Name="BuildGroupBox">
+            <Grid>
+                <GroupBox Header="Main Options" Height="165" HorizontalAlignment="Left" Margin="20,12,0,0" VerticalAlignment="Top" Width="216" Name="MainOptionsGroupBox">
+                    <Grid>
+                        <Label Content="Filesystem Size : " Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label1" VerticalAlignment="Top" Width="103" Grid.ColumnSpan="2" />
+                        <TextBox Height="23" HorizontalAlignment="Left" Margin="115,9,0,0" Name="RootFSSizeTextBox" VerticalAlignment="Top" Width="63" Text="1024" MaxLength="4" PreviewTextInput="RootFSSizeTextBox_PreviewTextInput" />
+                        <CheckBox Content="Install Pre Installed Packages" Height="16" HorizontalAlignment="Left" Margin="11,69,0,0" Name="PreInstalledPackagesCheckBox" VerticalAlignment="Top" Checked="OptionsCheckedChange" IsChecked="True" Unchecked="OptionsCheckedChange" IsThreeState="False" Visibility="Hidden" />
+                        <CheckBox Content="Update baseband" Height="16" HorizontalAlignment="Left" IsChecked="False" IsThreeState="False" Margin="11,91,0,0" Name="UpdateBasebandCheckBox" VerticalAlignment="Top" Visibility="Hidden" Checked="OptionsCheckedChange" />
+                        <CheckBox Content="Activate Phone" Height="16" HorizontalAlignment="Left" Margin="11,47,0,0" Name="ActivCheckBox" VerticalAlignment="Top" IsEnabled="False" Checked="OptionsCheckedChange" Unchecked="OptionsCheckedChange" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Other Options" Height="165" HorizontalAlignment="Left" Margin="248,12,0,0" VerticalAlignment="Top" Width="225" Name="OtherOptionsGroupBox">
+                    <Grid>
+                        <CheckBox Content="Enable Multitasking" Height="16" HorizontalAlignment="Left" Margin="20,12,0,0" Name="MultitaskCheckBox" VerticalAlignment="Top" IsEnabled="False" Checked="OptionsCheckedChange" Unchecked="OptionsCheckedChange" />
+                        <CheckBox Content="Enable Home Wallpaper" Height="16" HorizontalAlignment="Left" Margin="20,34,0,0" Name="WallpaperCheckBox" VerticalAlignment="Top" IsEnabled="False" Checked="OptionsCheckedChange" Unchecked="OptionsCheckedChange" />
+                        <CheckBox Content="Enable Battery Percentage" Height="16" HorizontalAlignment="Left" Margin="20,56,0,0" Name="BattPercCheckBox" VerticalAlignment="Top" IsEnabled="False" Checked="OptionsCheckedChange" Unchecked="OptionsCheckedChange" />
+                        <CheckBox Content="Custom Boot Logo" Height="16" HorizontalAlignment="Left" IsEnabled="False" Margin="20,78,0,0" Name="CustBootLgCheckBox" VerticalAlignment="Top" Checked="LogosCheckBoxes_Checked" Unchecked="LogosCheckBoxes_Checked" />
+                        <CheckBox Content="Custom Recovery Logo" Height="16" HorizontalAlignment="Left" IsEnabled="False" Margin="20,100,0,0" Name="CustRecovLgCheckBox" VerticalAlignment="Top" Checked="LogosCheckBoxes_Checked" Unchecked="LogosCheckBoxes_Checked" />
+                    </Grid>
+                </GroupBox>
+                <Button Content="Build !" Height="23" HorizontalAlignment="Left" Margin="191,192,0,0" Name="BuildButton" VerticalAlignment="Top" Width="115" Click="BuildButton_Click" IsEnabled="False" />
+                <Label Content="Not working" Height="28" HorizontalAlignment="Center"  Name="StatusLabel" VerticalAlignment="Center" Width="453" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="22,220,22,44" />
+                <ProgressBar Height="25" HorizontalAlignment="Left" Margin="20,0,0,15" Name="StatusProgressBar" VerticalAlignment="Bottom" Width="453" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Firmware" Height="74" HorizontalAlignment="Left" Margin="12,12,0,0" VerticalAlignment="Top" Width="510">
+            <Grid>
+                <Button Content="Browse" Height="23" HorizontalAlignment="Left" Margin="414,11,0,0" Name="BrowseFirmButton" VerticalAlignment="Top" Width="75" Click="BrowseFirmButton_Click" />
+                <Label Content="No firmware selected" Height="28" HorizontalAlignment="Left" Margin="6,10,0,0" Name="FirmLabel" VerticalAlignment="Top" Width="402" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

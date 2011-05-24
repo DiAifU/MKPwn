@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FilesystemPatches</key>
+	<dict>
+                <key>Core Files Installation</key>
+                <array>
+                        <dict>
+                                <key>Action</key>
+                                <string>Add</string>
+                                <key>File</key>
+                                <string>launchd</string>
+                                <key>Name</key>
+                                <string>launchd</string>
+                                <key>Path</key>
+                                <string>sbin/launchd</string>
+                                <key>MoreActions</key>
+                                <array>
+                                <dict>
+                                    <key>Action</key>
+                                    <string>SetPermission</string>
+                                    <key>File</key>
+                                    <string>sbin/launchd</string>
+                                    <key>Permission</key>
+                                    <string>755</string>
+                                </dict>
+                                </array>
+                        </dict>
+                </array>
+		<key>Filesystem Jailbreak</key>
+		<array>
+			<dict>
+				<key>Action</key>
+				<string>Patch</string>
+				<key>File</key>
+				<string>etc/fstab</string>
+				<key>Name</key>
+				<string>Filesystem Write Access</string>
+				<key>Patch</key>
+				<string>fstab.patch</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>Patch</string>
+				<key>File</key>
+				<string>System/Library/Lockdown/Services.plist</string>
+				<key>Name</key>
+				<string>Apple File Connection v2</string>
+				<key>Patch</key>
+				<string>Services.patch</string>
+			</dict>
+		</array>
+	</dict>
+	<key>FirmwarePatches</key>
+	<dict>
+		<key>Restore Ramdisk</key>
+		<dict>
+			<key>File</key>
+			<string>038-1448-003.dmg</string>
+			<key>TypeFlag</key>
+			<integer>8</integer>
+		</dict>
+		<key>Update Ramdisk</key>
+		<dict>
+			<key>File</key>
+			<string>038-1482-003.dmg</string>
+			<key>TypeFlag</key>
+			<integer>8</integer>
+		</dict>
+		<key>iBSS</key>
+		<dict>
+			<key>File</key>
+			<string>Firmware/dfu/iBSS.n18ap.RELEASE.dfu</string>
+			<key>IV</key>
+			<string>a4ff016010ce6831cae2a7009113c16f</string>
+			<key>Key</key>
+			<string>f7e6576f69cbcefbe96939efa39600cada2e13d12a6372499eff67f0566b86d2</string>
+			<key>Patch</key>
+			<string>iBSS.n18ap.RELEASE.patch</string>
+			<key>TypeFlag</key>
+			<integer>8</integer>
+		</dict>
+	</dict>
+	<key>RamdiskPatches</key>
+	<dict>
+		<key>asr</key>
+		<dict>
+			<key>File</key>
+			<string>usr/sbin/asr</string>
+			<key>Patch</key>
+			<string>asr.patch</string>
+		</dict>
+	</dict>
+	<key>PreInstalledPackages</key>
+	<array>
+		<string>org.saurik.cydia</string>
+	</array>
+	<key>DeleteBuildManifest</key>
+	<false/>
+	<key>RestoreRamdiskMountVolume</key>
+	<string>ramdisk</string>
+	<key>RootFilesystem</key>
+	<string>038-1491-003.dmg</string>
+	<key>RootFilesystemSize</key>
+	<integer>768</integer>
+	<key>RootFilesystemKey</key>
+	<string>affbe8f884694f4a3848097fa22a71bc1de24b070aa7e79f58a0880602dd21444cd559f2</string>
+	<key>RootFilesystemMountVolume</key>
+	<string>Durango8J2.N18OS</string>
+	<key>SHA1</key>
+	<string>b67300ebdc32b1e55b7212b937a3d4df83463d20</string>
+	<key>Filename</key>
+	<string>iPod3,1_4.3.3_8J2_Restore.ipsw</string>
+	<key>Name</key>
+	<string>iPod3,1_4.3.3_8J2</string>
+	<key>DownloadUrl</key>
+	<string></string>
+	<key>Platform</key>
+	<integer>2</integer>
+	<key>SubPlatform</key>
+	<integer>8</integer>
+</dict>
+</plist>

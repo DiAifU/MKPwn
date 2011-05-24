@@ -1,0 +1,16 @@
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\bin\Debug\WinPwner.exe
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\bin\Debug\WinPwner.pdb
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\bin\Debug\CoreFoundationDotNet.dll
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\bin\Debug\Ionic.Zip.dll
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\bin\Debug\CoreFoundationDotNet.pdb
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\ResolveAssemblyReference.cache
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\MainWindow.baml
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\MainWindow.g.cs
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\App.g.cs
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\WinPwner_MarkupCompile.cache
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\WinPwner.g.resources
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\WinPwner.Properties.Resources.resources
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\ResGen.read.1.tlog
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\ResGen.write.1.tlog
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\WinPwner.exe
+g:\users\nicolas\documents\visual studio 2010\Projects\WinPwner\WinPwner\obj\x86\Debug\WinPwner.pdb
