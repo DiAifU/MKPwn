@@ -256,7 +256,7 @@ namespace MKPwn
                             {
                                 if (img.Width > 320 || img.Height > 480 || new FileInfo(CustBootLgPath).Length > 100000)
                                 {
-                                    MessageBox.Show("Error :  Either you PNG is not 320x480 or it is more than 100kb", "MKPwn", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("ERROR: Either you PNG is not 320x480 or it is more than 100kb", "MKPwn", MessageBoxButton.OK, MessageBoxImage.Error);
                                     CustBootLgPath = null;
                                 }
                                 else break;
@@ -290,7 +290,7 @@ namespace MKPwn
                             {
                                 if (img.Width > 320 || img.Height > 480 || new FileInfo(CustRecovLgPath).Length > 100000)
                                 {
-                                    MessageBox.Show("Error :  Either you PNG is not 320x480 or it is more than 100kb", "MKPwn", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("ERROR: Either you PNG is not 320x480 or it is more than 100kb", "MKPwn", MessageBoxButton.OK, MessageBoxImage.Error);
                                     CustRecovLgPath = null;
                                 }
                                 else break;
@@ -345,6 +345,23 @@ namespace MKPwn
             }
         }
 
+        private bool IsFirmwareBundleValid(string bundlePath)
+        {
+            if (!WinFormFile.Exists(bundlePath))
+            {
+                Console.WriteLine("ERROR: Bundle " + WinFormPath.GetFileName(bundlePath) + " is invalid !");
+                return false;
+            }
+            FirmwareBundleInfoNode = (CFDictionaryRef)CFPropertyListRef.CreateWithData(new CFDataRef(WinFormFile.ReadAllBytes(bundlePath)), CFPropertyListMutabilityOptions.kCFPropertyListImmutable);
+            if (FirmwareBundleInfoNode.GetValue("SHA1").ToString() == FirmwareSHA1)
+            {
+                FirmwareBundlePath = bundlePath;
+                return true;
+            }
+            return false;
+
+        }
+
         private void IdentifyIPSW(object file)
         {
             string path = (string)file;
@@ -356,22 +373,29 @@ namespace MKPwn
             foreach (string bundle in Directory.GetDirectories(FIRMWARE_BUNDLES_PATH))
             {
                 string InfoBundle = WinFormPath.Combine(bundle, "Info.plist");
-                if (!WinFormFile.Exists(InfoBundle))
-                {
-                    Console.WriteLine("Bundle " + WinFormPath.GetFileName(bundle) + " is invalid !");
-                    continue;
-                }
-                FirmwareBundleInfoNode = (CFDictionaryRef)CFPropertyListRef.CreateWithData(new CFDataRef(WinFormFile.ReadAllBytes(InfoBundle)), CFPropertyListMutabilityOptions.kCFPropertyListImmutable);
-                if (FirmwareBundleInfoNode.GetValue("SHA1").ToString() == FirmwareSHA1)
-                {
-                    FirmwareBundlePath = bundle;
+                if (IsFirmwareBundleValid(InfoBundle))
                     break;
-                }
             }
             if (FirmwareBundlePath == null)
             {
-                Dispatcher.Invoke(DispatcherPriority.Normal,new IdentifyIPSWLabelUpdateDelegate(IdentifyIPSWLabelUpdate), "ERROR: Unable to find Firmware bundle for you IPSW !");
-                Dispatcher.Invoke(DispatcherPriority.Normal,new EnableControlDelegate(EnableControl), BrowseFirmButton, true);
+                if (MessageBox.Show("Unable to find firmware bundle. Would you like to browse for an personal bundle ?", "MKPwn", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    System.Windows.Forms.FolderBrowserDialog PersBundleDialog = new System.Windows.Forms.FolderBrowserDialog();
+                    PersBundleDialog.RootFolder = Environment.SpecialFolder.MyComputer;
+                    if (PersBundleDialog.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        string InfoBundle = WinFormPath.Combine(PersBundleDialog.SelectedPath, "Info.plist");
+
+                        if (!IsFirmwareBundleValid(InfoBundle))
+                        {
+                            Dispatcher.Invoke(DispatcherPriority.Normal, new IdentifyIPSWLabelUpdateDelegate(IdentifyIPSWLabelUpdate), "ERROR: Personal Firmware bundle is invalid !");
+                            Dispatcher.Invoke(DispatcherPriority.Normal, new EnableControlDelegate(EnableControl), BrowseFirmButton, true);
+                            return;
+                        }
+                    }
+                }
+                Dispatcher.Invoke(DispatcherPriority.Normal, new IdentifyIPSWLabelUpdateDelegate(IdentifyIPSWLabelUpdate), "ERROR: Unable to find Firmware bundle for you IPSW !");
+                Dispatcher.Invoke(DispatcherPriority.Normal, new EnableControlDelegate(EnableControl), BrowseFirmButton, true);
                 return;
             }
             data.Close();
