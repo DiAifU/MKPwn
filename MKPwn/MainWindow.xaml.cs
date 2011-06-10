@@ -138,7 +138,7 @@ namespace MKPwn
             SetProgressBarValue(0.0);
         }
 
-        static void ParseAndExecuteAction(CFDictionaryRef action)
+        private void ParseAndExecuteAction(CFDictionaryRef action)
         {
             string Action = action.GetValue("Action").ToString();
             if (Action == "Add")
@@ -172,13 +172,13 @@ namespace MKPwn
                 Pwn.hfsplus_extract(DecryptedRootFS, remotePath, localPath);
                 if (!File.Exists(localPath))
                 {
-                    Console.WriteLine("ERROR: Unable to extract " + remotePath + " from Root Filesystem");
+                    Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Normal,new StatusLabelUpdateDelegate(StatusLabelUpdate), "ERROR: Unable to extract " + remotePath + " from Root Filesystem");
                     return;
                 }
                 Pwn.bspatch(localPath, localPathPatched, patchPath);
                 if (!File.Exists(localPathPatched))
                 {
-                    Console.WriteLine("ERROR: Unable to patch " + WinFormPath.GetFileName(localPath));
+                    Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Normal,new StatusLabelUpdateDelegate(StatusLabelUpdate), "ERROR: Unable to patch " + WinFormPath.GetFileName(localPath));
                     return;
                 }
                 Pwn.hfsplus_mv(DecryptedRootFS, remotePath, remotePath + "_orig");
@@ -349,13 +349,13 @@ namespace MKPwn
         {
             if (!WinFormFile.Exists(bundlePath))
             {
-                Console.WriteLine("ERROR: Bundle " + WinFormPath.GetFileName(bundlePath) + " is invalid !");
+                Dispatcher.Invoke(DispatcherPriority.Normal,new StatusLabelUpdateDelegate(StatusLabelUpdate), "ERROR: Bundle " + WinFormPath.GetFileName(bundlePath) + " is invalid !");
                 return false;
             }
             FirmwareBundleInfoNode = (CFDictionaryRef)CFPropertyListRef.CreateWithData(new CFDataRef(WinFormFile.ReadAllBytes(bundlePath)), CFPropertyListMutabilityOptions.kCFPropertyListImmutable);
             if (FirmwareBundleInfoNode.GetValue("SHA1").ToString() == FirmwareSHA1)
             {
-                FirmwareBundlePath = bundlePath;
+                FirmwareBundlePath = bundlePath.Remove(bundlePath.Length - "\\Info.plist".Length);
                 return true;
             }
             return false;
@@ -512,7 +512,7 @@ namespace MKPwn
                         Pwn.bspatch(localPath, localPathPatched, patchPath);
                         if (!File.Exists(localPathPatched))
                         {
-                            Console.WriteLine("ERROR: Unable to patch " + WinFormPath.GetFileName(localPath));
+                            Dispatcher.Invoke(DispatcherPriority.Normal,new StatusLabelUpdateDelegate(StatusLabelUpdate), "ERROR: Unable to patch " + WinFormPath.GetFileName(localPath));
                             return;
                         }
                         File.Delete(localPath);
